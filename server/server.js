@@ -1,6 +1,7 @@
 const express = require('express');
 // import ApolloServer
 const { ApolloServer } = require('apollo-server-express');
+const mongoose = require('mongoose');
 
 // import our typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');

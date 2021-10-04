@@ -23,14 +23,14 @@ const resolvers = {
 		// 	return Book.findOne({ title });
 		// },
 		// get all users
-		users: async () => {
-			return User.find().select('-__v -password').populate('books');
-		},
-		user: async (parent, { username }) => {
-			return User.findOne({ username })
-				.select('-__v -password')
-				.populate('books');
-		},
+		// users: async () => {
+		// 	return User.find().select('-__v -password').populate('books');
+		// },
+		// user: async (parent, { username }) => {
+		// 	return User.findOne({ username })
+		// 		.select('-__v -password')
+		// 		.populate('books');
+		// },
 	},
 	Mutation: {
 		addUser: async (parent, args) => {
@@ -57,7 +57,7 @@ const resolvers = {
 			if (context.user) {
 				const book = await Book.findOneAndUpdate(
 					{ _id: context.user._id },
-					{ $push: { savedBooks: { input } } },
+					{ $addToSet: { savedBooks: { input } } },
 					{ new: true }
 				).populate('savedBooks');
 				return book;

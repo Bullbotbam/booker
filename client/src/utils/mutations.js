@@ -29,8 +29,6 @@ export const SAVE_BOOK = gql`
 		saveBook(imput: $input) {
 			_id
 			username
-			email
-			bookCount
 			savedBooks {
 				bookId
 				authors
@@ -48,7 +46,6 @@ export const REMOVE_BOOK = gql`
 		removeBook(bookId: $bookId) {
 			_id
 			username
-			email
 			savedBooks {
 				bookId
 				author
