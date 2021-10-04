@@ -7,20 +7,21 @@ import {
 	Card,
 	Button,
 } from 'react-bootstrap';
-import { deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
-	const [userData, setUserData] = useState({});
+	// const [userData, setUserData] = useState({});
 
 	// use this to determine if `useEffect()` hook needs to run again
-	const userDataLength = Object.keys(userData).length;
+	// const userDataLength = Object.keys(userData).length;
 	const { loading, data } = useQuery(GET_ME);
-
+	const user = data?.me || data?.user || [];
 	// create function that accepts the book's mongo _id value as param and deletes the book from the database
+	const removeBook = useMutation(REMOVE_BOOK);
+
 	const handleDeleteBook = async (bookId) => {
 		const token = Auth.loggedIn() ? Auth.getToken() : null;
 		if (!token) {
@@ -28,14 +29,12 @@ const SavedBooks = () => {
 		}
 
 		try {
-			const response = await removeBook(bookId, token);
+			await removeBook({
+				variables: { bookId: user._id },
+			});
 
-			if (!response.ok) {
-				throw new Error('something went wrong!');
-			}
-
-			const updatedUser = await response.json();
-			setUserData(updatedUser);
+			// const updatedUser = await response.json();
+			// setUserData(updatedUser);
 			// upon success, remove book's id from localStorage
 			removeBookId(bookId);
 		} catch (err) {
@@ -57,11 +56,11 @@ const SavedBooks = () => {
 			</Jumbotron>
 			<Container>
 				<h2>
-					{userData.savedBooks.length
+					{/* {userData.savedBooks.length
 						? `Viewing ${userData.savedBooks.length} saved ${
 								userData.savedBooks.length === 1 ? 'book' : 'books'
 						  }:`
-						: 'You have no saved books!'}
+						: 'You have no saved books!'} */}
 				</h2>
 				<CardColumns>
 					{userData.savedBooks.map((book) => {
