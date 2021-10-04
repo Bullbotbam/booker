@@ -32,6 +32,11 @@ startServer();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/booker', {
+	useFindAndModify: false,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
 
 db.once('open', () => {
 	app.listen(PORT, () => {
