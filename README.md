@@ -3,6 +3,8 @@
 
   <h1 align="center"> Booker </h1>
 
+![Booker App](/client/public/booker_book_search.gif)
+
 [Click here for Booker App Demo](https://quiet-ocean-71476.herokuapp.com/)
 
 A book search app
@@ -41,3 +43,5 @@ With support and assistance from the developer community at large.
 ## Issues
 
 work in progress. save books function is flawed
+
+![Booker App](/client/public/Booker.png)
