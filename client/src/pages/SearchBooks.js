@@ -43,7 +43,7 @@ const SearchBooks = () => {
 			const response = await searchGoogleBooks(searchInput);
 
 			if (!response.ok) {
-				throw new Error('something went wrong!');
+				throw new Error('Houston we have a problem.');
 			}
 
 			const { items } = await response.json();
@@ -82,7 +82,7 @@ const SearchBooks = () => {
 				throw new Error('something went wrong!');
 			}
 
-			// if book successfully saves to user's account, save book id to state
+			// book successfully saves to user's account, save book id to state
 			setSavedBookIds([...savedBookIds, bookToSave.bookId]);
 		} catch (err) {
 			console.error(err);
