@@ -1,16 +1,13 @@
-## booker
-
-book search app
-<br/>
-<br/>
-<br/>
-
 [![NPM Version](https://img.shields.io/npm/v/npm.svg?style=flat)]()
 <br />
 
   <h1 align="center"> Booker </h1>
-     
-  ## Table of Contents
+
+[Click here for Booker App Demo](https://quiet-ocean-71476.herokuapp.com/)
+
+A book search app
+
+## Table of Contents
 
 - [Description](#description)
 - [Installation](#installation)

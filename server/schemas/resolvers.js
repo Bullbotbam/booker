@@ -14,23 +14,16 @@ const resolvers = {
 			}
 			throw new AuthenticationError('Please log in for more information');
 		},
-		// // get all books
-		// books: async () => {
-		// 	return Book.find();
-		// },
-		// // get a book by id
-		// book: async (parent, { title }) => {
-		// 	return Book.findOne({ title });
-		// },
+
 		// get all users
-		// users: async () => {
-		// 	return User.find().select('-__v -password').populate('books');
-		// },
-		// user: async (parent, { username }) => {
-		// 	return User.findOne({ username })
-		// 		.select('-__v -password')
-		// 		.populate('books');
-		// },
+		users: async () => {
+			return User.find().select('-__v -password').populate('savedBooks');
+		},
+		user: async (parent, { username }) => {
+			return User.findOne({ username })
+				.select('-__v -password')
+				.populate('savedBooks');
+		},
 	},
 	Mutation: {
 		addUser: async (parent, args) => {
@@ -53,23 +46,23 @@ const resolvers = {
 			const token = signToken(user);
 			return { token, user };
 		},
-		saveBook: async (parent, { book }, context) => {
+		saveBook: async (parent, { input }, context) => {
 			if (context.user) {
-				const book = await Book.findOneAndUpdate(
+				const updatedUser = await User.findOneAndUpdate(
 					{ _id: context.user._id },
-					{ $addToSet: { savedBooks: { input } } },
+					{ $addToSet: { savedBooks: input } },
 					{ new: true }
-				).populate('savedBooks');
-				return book;
+				);
+				return updatedUser;
 			}
 		},
 		removeBook: async (paremt, { bookId }, context) => {
 			if (context.user) {
-				const book = await Book.findOneAndUpdate(
+				const updatedUser = await User.findOneAndUpdate(
 					{ _id: context.user._id },
 					{ $pull: { savedBooks: { bookId: bookId } } }
 				);
-				return book;
+				return updatedUser;
 			}
 		},
 	},
