@@ -13,11 +13,12 @@ import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
+	// create function that accepts the book's mongo _id value as param and deletes the book from the database
+	const [removeBook] = useMutation(REMOVE_BOOK);
 	// use this to determine if `useEffect()` hook needs to run again
 	const { data } = useQuery(GET_ME);
 	const userData = data?.me || [];
-	// create function that accepts the book's mongo _id value as param and deletes the book from the database
-	const [removeBook] = useMutation(REMOVE_BOOK);
+
 	const userDataLength = Object.keys(userData).length;
 
 	const handleDeleteBook = async (bookId) => {
