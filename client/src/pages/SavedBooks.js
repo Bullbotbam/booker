@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import {
 	Jumbotron,
@@ -13,8 +13,6 @@ import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
-	// const [userData, setUserData] = useState({});
-
 	// use this to determine if `useEffect()` hook needs to run again
 	const { data } = useQuery(GET_ME);
 	const userData = data?.me || [];
