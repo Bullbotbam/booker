@@ -11,6 +11,7 @@ import { setContext } from '@apollo/client/link/context';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
+import { Carousel } from 'react-bootstrap';
 
 const httpLink = createHttpLink({
 	uri: '/graphql',
@@ -36,6 +37,7 @@ function App() {
 		<ApolloProvider client={client}>
 			<Router>
 				<>
+					<Carousel />
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={SearchBooks} />
