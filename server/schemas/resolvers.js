@@ -15,15 +15,15 @@ const resolvers = {
 			throw new AuthenticationError('Please log in for more information');
 		},
 
-		// get all users
-		users: async () => {
-			return User.find().select('-__v -password').populate('savedBooks');
-		},
-		user: async (parent, { username }) => {
-			return User.findOne({ username })
-				.select('-__v -password')
-				.populate('savedBooks');
-		},
+		// // get all users
+		// users: async () => {
+		// 	return User.find().select('-__v -password').populate('savedBooks');
+		// },
+		// user: async (parent, { username }) => {
+		// 	return User.findOne({ username })
+		// 		.select('-__v -password')
+		// 		.populate('savedBooks');
+		// },
 	},
 	Mutation: {
 		addUser: async (parent, args) => {
